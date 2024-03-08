@@ -20,7 +20,11 @@ object Garfield {
 
     // COMPORTAMIENTO (Métodods / Funciones)
     fun sterilize() {
-        sterilized = true
+        if(this.age() < 3) {
+            sterilized = true
+        } else {
+            println("The cat is too young")
+        }
     }
     fun vaccinate() {
         vaccinated = true
@@ -40,6 +44,41 @@ Garfield.birthdate = "2024-03-08"
 // Syntax for accessing fields
 Garfield.sterilize()
 println("The cat is ${Garfield.age()} years old")
+
+object Gnemo {
+    // DATOS (Atributos / Propiedades)
+    var breed: String = "stray"
+    var birthdate: String = "1994-08-05"
+    val year = birthdate.substring(0, 4).toInt()
+    val month = birthdate.substring(5, 7).toInt()
+    val day = birthdate.substring(8).toInt()
+    val localDate = LocalDate.of(year, month, day)
+    var sterilized: Boolean = true
+    var vaccinated:Boolean = true
+
+    // COMPORTAMIENTO (Métodods / Funciones)
+    fun sterilize() {
+        if(this.age() < 3) {
+            sterilized = true
+        } else {
+            println("The cat is too young")
+        }
+    }
+    fun vaccinate() {
+        vaccinated = true
+    }
+    fun age(): Int {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return ZonedDateTime.now().year - localDate.year
+    }
+}
+
+object AgeDifferenceCalculator {
+    fun calculate(): Int {
+        return Garfield.age() - Gnemo.age()
+    }
+}
+println("The age difference between the cats is ${AgeDifferenceCalculator.calculate()} years")
 
 // Sec 04 -> EXERCISE
 object pen {
