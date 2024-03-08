@@ -1,3 +1,5 @@
+import kotlin.math.PI
+
 // Exercise: Complete the code to make the program print "Mary is 20 years old" to standard output:
 fun solution001() {
     val name = "Mary"
@@ -142,3 +144,35 @@ fun solution011() {
     }
 
 println(solution011())
+
+///////
+///////
+///////
+
+// Exercise 1: Write a function called circleArea that takes the radius of a circle in integer format as a parameter and outputs the area of that circle.
+//import kotlin.math.PI
+val PI: Double = 3.14159265358979323846
+
+fun solution012(radius: Int): Double {
+    return PI * radius * radius
+}
+println(solution012(2))
+
+// Exercise 2: Rewrite the circleArea function from the previous exercise as a single-expression function.
+fun solution013(radius: Int) = PI * radius * radius
+println(solution013(2))
+
+fun solution014(radius: Int): Double = PI * radius * radius
+println(solution014(2))
+
+// Exercise 3: You have a function that translates a time interval given in hours, minutes, and seconds into seconds. In most cases, you need to pass only one or two function parameters while the rest are equal to 0. Improve the function and the code that calls it by using default parameter values and named arguments so that the code is easier to read.
+fun intervalInSeconds(hours: Int = 0, minutes: Int = 0, seconds: Int = 0) =
+    ((hours * 60) + minutes) * 60 + seconds
+fun solution015() {
+    println(intervalInSeconds(1, 20, 15))
+    println(intervalInSeconds(minutes = 1, seconds = 25))
+    println(intervalInSeconds(2))
+    println(intervalInSeconds(minutes = 10))
+    println(intervalInSeconds(hours = 1, seconds = 1))
+}
+println(solution015())
