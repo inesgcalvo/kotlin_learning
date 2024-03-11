@@ -1,2 +1,5 @@
 # kotlin_CRUD
-CRUD creation with Kotlin
+
+This repository was used to:
+1. Learn Kotlin language
+2. Create a CRUD
