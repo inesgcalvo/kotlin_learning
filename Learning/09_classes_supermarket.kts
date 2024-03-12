@@ -1,3 +1,9 @@
+import java.time.LocalDate
+import kotlin.random.Random
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.text.DecimalFormat
+
 // Ejercicio: modelar una caja de supermercado usando orientación a objetos
 // El objetivo de este ejercicio es poner en práctica:
 // la representación de los datos de un objeto.
@@ -38,7 +44,9 @@ fun generateSalesPrice() = salesPrices.random()
 fun generatePurchasePrices() = purchasePrices.random()
 
 var VAT: Double = 0.21
-class SuperMarketCheckout(val clientName: String, val clientID: String) {
+class SuperMarketCheckout {
+    val clientName = generateClientName()
+    val clientID = generateClientID()
     var productsBarcodeList: MutableList<String> = mutableListOf()
     var productsNameList: MutableList<String> = mutableListOf()
     var productsPriceList: MutableList<Double> = mutableListOf()
@@ -56,20 +64,23 @@ class SuperMarketCheckout(val clientName: String, val clientID: String) {
         productsPriceList.add(productPrice)
         productsPriceVATList.add(productPriceVAT)
     }
+    fun printProductsNameList() {
+        println("Products: $productsNameList")
+    }
     fun printPriceList() {
-        println(productsPriceList)
+        var totalPrice: Double = productsPriceList.sum()
+        val formattedPrice = DecimalFormat("0.000").format(totalPrice)
+        println("Total Price: $$formattedPrice")
     }
     fun printPriceVATList() {
-        println(productsPriceVATList)
+        var totalPrice: Double = productsPriceVATList.sum()
+        val formattedPrice = DecimalFormat("0.000").format(totalPrice)
+        println("Total VAT Price: $$formattedPrice")
     }
-}
-class Client {
-    val name = generateClientName()
-    val clientID = generateClientID()
-    fun printName() {
-        println(name)
+    fun printClientName() {
+        println(clientName)
     }
-    fun printId() {
+    fun printClientID() {
         println(clientID)
     }
 }
@@ -95,37 +106,19 @@ class Product {
     }
 }
 
-fun infoClient() {
-    val client = Client()
-    print("Client Name: ")
-    client.printName()
-    print("Client ID: ")
-    client.printId()
-}
-
-fun infoProduct() {
-    val product = Product()
-    print("Product Name: ")
-    product.printName()
-    print("Product Barcode: ")
-    product.printBarcode()
-    print("Price: ")
-    product.printPrice()
-    print("Price with VAT: ")
-    product.printPriceVAT()
-}
-
 fun infoSuperMarketCheckout() {
-    val client = Client()
-    val clientID = client.clientID
-    val clientName = client.name
-    SuperMarketCheckout(clientID = clientID, clientName = clientName).addProduct()
-    println("Price List: ")
-    SuperMarketCheckout(clientID = clientID, clientName = clientName).printPriceList()
-    println("Price VAT List: ")
-    SuperMarketCheckout(clientID = clientID, clientName = clientName).printPriceVATList()
+    val supermarket = SuperMarketCheckout()
+    print("Client Name: ")
+    supermarket.printClientName()
+    print("Client ID: ")
+    supermarket.printClientID()
+    supermarket.addProduct()
+    supermarket.addProduct()
+    supermarket.addProduct()
+    supermarket.printProductsNameList()
+    supermarket.printPriceList()
+    supermarket.printPriceVATList()
 }
 
 println(":::")
 infoSuperMarketCheckout()
-
