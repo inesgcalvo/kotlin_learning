@@ -195,6 +195,7 @@ fun startWashingMachine(){
 
 testWashingMachine()
 startWashingMachine()
+println(":::")
 testWashingMachine()
 
 ///////
@@ -365,6 +366,7 @@ fun driveSomewhere() {
 
 carInfo()
 driveSomewhere()
+println(":::")
 carInfo()
 
 ///////
@@ -402,17 +404,34 @@ var clientNames: MutableSet<String> = mutableSetOf("Raoul", "Fred", "Rita", "Mis
 fun generateClientID() = clientIDs.random()
 fun generateClientName() = clientNames.random()
 
-var productBarCodes: MutableSet<String> = mutableSetOf("A-0010-Z", "A-0020-Z", "A-0030-Z", "A-0040-Z", "A-0050-Z", "A-0060-Z", "A-0070-Z", "A-0080-Z", "A-0090-Z", "A-0100-Z")
+var productBarcodes: MutableSet<String> = mutableSetOf("A-0010-Z", "A-0020-Z", "A-0030-Z", "A-0040-Z", "A-0050-Z", "A-0060-Z", "A-0070-Z", "A-0080-Z", "A-0090-Z", "A-0100-Z")
 var productNames: MutableSet<String> = mutableSetOf("Tomato", "Apple", "Milk", "The", "Coffee", "Detergent", "Soap", "Rice", "Green Beans", "Orange")
-fun generateproductBarCode() = productBarCodes.random()
+var salesPrices: MutableSet<Double> = mutableSetOf(10.0, 20.5, 26.4, 12.4, 74.1, 56.4, 23.4, 33.3, 42.1, 12.9)
+var purchasePrices: MutableSet<Double> = mutableSetOf(2.1, 5.7, 9.7, 5.6, 3.7, 7.2, 6.6, 4.5, 5.4, 2.1)
+fun generateProductBarcode() = productBarcodes.random()
 fun generateProductName() = productNames.random()
-
+fun generateSalesPrice() = salesPrices.random()
+fun generatePurchasePrices() = purchasePrices.random()
 
 var VAT: Double = 0.21
 class SuperMarketCheckout(val clientName: String, val clientID: String) {
-    var productNameList: MutableList<String> = mutableListOf()
-    fun addProduct(product: String) {
-        productNameList.add(product)
+    var productsBarcodeList: MutableList<String> = mutableListOf()
+    var productsNameList: MutableList<String> = mutableListOf()
+    var productsPriceList: MutableList<String> = mutableListOf()
+    var productsPriceVATList: MutableList<String> = mutableListOf()
+
+    val product = Product()
+    print("Product Name: ")
+    product.printName()
+    print("Product Barcode: ")
+
+    print("Price: ")
+    product.printPrice()
+    print("Price with VAT: ")
+    product.printPriceVAT()
+    fun addProduct() {
+        productsBarcodeList.add(product.printBarcode())
+        productsNameList.add(product.printName())
     }
 }
 class Client {
@@ -428,19 +447,22 @@ class Client {
 
 class Product {
     val name: String = generateProductName()
-    val barcode: String = generateproductBarCode()
-    var salesPriceWithoutVAT: Double = 0.20
-    var salesPriceWithVAT: Double = salesPriceWithoutVAT * VAT
-    private var purchasePrice: Double = 0.10
+    val barcode: String = generateProductBarcode()
+    var salesPriceWithoutVAT: Double = generateSalesPrice()
+    var salesPriceWithVAT: Double = salesPriceWithoutVAT + (salesPriceWithoutVAT * VAT)
+    private var purchasePrice: Double = generatePurchasePrices()
 
-    fun calculateProfits () {
-        null
-    }
     fun printName() {
         println(name)
     }
     fun printBarcode() {
         println(barcode)
+    }
+    fun printPriceVAT() {
+        println("$$salesPriceWithVAT")
+    }
+    fun printPrice() {
+        println("$$salesPriceWithoutVAT")
     }
 }
 
@@ -458,6 +480,10 @@ fun infoProduct() {
     product.printName()
     print("Product Barcode: ")
     product.printBarcode()
+    print("Price: ")
+    product.printPrice()
+    print("Price with VAT: ")
+    product.printPriceVAT()
 }
 
 fun infoSuperMarketCheckout() {
@@ -467,6 +493,9 @@ fun infoSuperMarketCheckout() {
 //    println("Price + VAT: $${Tomato.salesPriceWithVAT}")
 }
 
+
 infoClient()
+println(":::")
 infoProduct()
+println(":::")
 infoSuperMarketCheckout()
