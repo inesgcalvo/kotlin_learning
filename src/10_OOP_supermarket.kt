@@ -1,8 +1,4 @@
 import java.text.DecimalFormat
-import java.time.LocalDate
-import kotlin.random.Random
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 
 // Ejercicio: modelar una caja de supermercado usando orientación a objetos
 // El objetivo de este ejercicio es poner en práctica:

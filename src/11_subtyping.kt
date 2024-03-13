@@ -1,8 +1,3 @@
-import java.time.LocalDate
-import kotlin.random.Random
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-
 // Kingdom Animalia - interface
 // [...]
 // Order Primate - interface
