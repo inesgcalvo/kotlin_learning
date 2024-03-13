@@ -22,6 +22,7 @@ class SuborderStrepsirrhini: OrderPrimates() {
         (OrderPrimates().lisfOfPrimates).add(member)
     }
 }
+
 class SuborderHaplorhini: OrderPrimates() {
     override val type: String = "Suborder"
     override val name: String = "Haplorhini"
